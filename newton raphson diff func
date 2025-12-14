@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <math.h>
+
+double f(double x)
+{
+    return (x*x*x +  x*x - 3*x - 3);
+}
+
+
+double df(double x)
+{
+    return (3*x*x + 2*x -3);
+}
+
+int main()
+{
+    double x0, x1, error;
+    int iteration = 0;
+    double tolerance = 0.000001;
+
+
+    printf("Enter initial guess: ");
+    scanf("%lf", &x0);
+
+    do
+    {
+        if (df(x0) == 0)
+        {
+            printf("Derivative is zero. Newton's method fails.\n");
+            return 0;
+        }
+
+        x1 = x0 - f(x0) / df(x0);
+        error = fabs(x1 - x0);
+        x0 = x1;
+        iteration++;
+
+    } while (error > tolerance);
+
+    
+    printf("\nEstimated root = %lf", x1);
+    printf("\nFunctional value at root f(x) = %lf", f(x1));
+    printf("\nNumber of iterations required = %d\n", iteration);
+
+    return 0;
+}
