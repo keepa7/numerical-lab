@@ -3,13 +3,13 @@
 
 double f(double x)
 {
-    return (x*x + 4*x - 9);
+    return (x*x - 2);
 }
 
 
 double df(double x)
 {
-    return (2*x - 4);
+    return (2*x);
 }
 
 int main()
