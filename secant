@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <math.h>
+
+
+double f(double x)
+{
+    return (x*x*x +  x*x - 3*x - 3);
+	  
+}
+
+int main()
+{
+    double x0, x1, x2;
+    double tolerance;
+    int maxIter, iter = 0;
+
+    
+    printf("Enter first initial guess: ");
+    scanf("%lf", &x0);
+
+    printf("Enter second initial guess: ");
+    scanf("%lf", &x1);
+
+    
+    printf("Enter tolerance: ");
+    scanf("%lf", &tolerance);
+
+    printf("Enter maximum number of iterations: ");
+    scanf("%d", &maxIter);
+
+    
+    while (iter < maxIter)
+    {
+        if (f(x1) - f(x0) == 0)
+        {
+            printf("Mathematical error: Division by zero.\n");
+            return 0;
+        }
+
+        x2 = x1 - (f(x1) * (x1 - x0)) / (f(x1) - f(x0));
+
+        if (fabs(x2 - x1) < tolerance)
+            break;
+
+        x0 = x1;
+        x1 = x2;
+        iter++;
+    }
+
+    
+    printf("\nEstimated root = %.6lf\n", x2);
+    printf("Function value at root f(x) = %.6lf\n", f(x2));
+    printf("Number of iterations = %d\n", iter + 1);
+
+    return 0;
+}
