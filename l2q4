@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+	 printf("\n Program by Keepa");
+    int n, i, j, mid;
+    float x[20], y[20][20], xp, h, p, sum;
+
+    printf("\n Enter number of data points: ");
+    scanf("%d", &n);
+
+    printf("Enter x values:\n");
+    for(i = 0; i < n; i++)
+        scanf("%f", &x[i]);
+
+    printf("Enter y values:\n");
+    for(i = 0; i < n; i++)
+        scanf("%f", &y[i][0]);
+
+    
+    for(j = 1; j < n; j++) {
+        for(i = 0; i < n - j; i++) {
+            y[i][j] = y[i + 1][j - 1] - y[i][j - 1];
+        }
+    }
+
+    printf("Enter the value of x to find f(x): ");
+    scanf("%f", &xp);
+
+    h = x[1] - x[0];
+    mid = n / 2;
+    p = (xp - x[mid]) / h;
+
+    sum = y[mid][0];
+
+    if(n >= 2)
+        sum += p * (y[mid][1] + y[mid - 1][1]) / 2;
+
+    if(n >= 3)
+        sum += (p * p * y[mid - 1][2]) / 2;
+
+    printf("The approximate value of f(%.2f) is %.4f\n", xp, sum);
+
+    return 0;
+}
